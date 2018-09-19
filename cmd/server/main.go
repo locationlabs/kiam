@@ -71,7 +71,13 @@ func main() {
 	}
 
 	if flags.jsonLog {
-		log.SetFormatter(&log.JSONFormatter{})
+		log.SetFormatter(&log.JSONFormatter{
+			FieldMap: log.FieldMap{
+				log.FieldKeyTime: "timestamp",
+				log.FieldKeyLevel: "level",
+				log.FieldKeyMsg: "message",
+			},
+		},)
 	}
 
 	switch flags.logLevel {
